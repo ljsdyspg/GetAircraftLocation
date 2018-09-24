@@ -19,4 +19,11 @@
         android:text="GetDroneLocation"
         android:layout_marginTop="260dp"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/ShowOnMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show on map"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

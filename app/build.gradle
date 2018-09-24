@@ -48,6 +48,8 @@ dependencies {
     compile 'com.android.support:design:26.1.0'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.amap.api:map2d:latest.integration'
+    compile 'com.amap.api:3dmap:latest.integration'
 
     compile('com.dji:dji-sdk:4.7.1')
     provided('com.dji:dji-sdk-provided:4.7.1')

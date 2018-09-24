@@ -23,17 +23,19 @@ import dji.sdk.useraccount.UserAccountManager;
 
 public class GetLocation extends Activity implements View.OnClickListener{
     protected static final String TAG = "Activity";
-    private double droneLocationLat = 181, droneLocationLng = 181,droneHeight=181;
+    private double aircraftLat = 181, aircraftLng = 181,aircraftHeight=181;
     private FlightController mFlightController;
 
-    private Button getLoc;
+    private Button getLoc,getMap;
     private TextView LocInfo;
 
     private void initUI(){
         getLoc = (Button) findViewById(R.id.GetLoc);
+        getMap = (Button) findViewById(R.id.ShowOnMap);
         LocInfo = (TextView) findViewById(R.id.LocInf);
 
         getLoc.setOnClickListener(this);
+        getMap.setOnClickListener(this);
     }
 
     @Override
@@ -79,12 +81,12 @@ public class GetLocation extends Activity implements View.OnClickListener{
                         @Override
                         public void onUpdate(FlightControllerState
                                                      djiFlightControllerCurrentState) {
-                            droneLocationLat = djiFlightControllerCurrentState.getAircraftLocation().getLatitude();
-                            droneLocationLng = djiFlightControllerCurrentState.getAircraftLocation().getLongitude();
-                            droneHeight = djiFlightControllerCurrentState.getAircraftLocation().getAltitude();
+                            aircraftLat = djiFlightControllerCurrentState.getAircraftLocation().getLatitude();
+                            aircraftLng = djiFlightControllerCurrentState.getAircraftLocation().getLongitude();
+                            aircraftHeight = djiFlightControllerCurrentState.getAircraftLocation().getAltitude();
                         }
                     });
-            String a = "get: "+droneHeight;
+            String a = "get: "+aircraftHeight;
             Toast.makeText(this,a,Toast.LENGTH_LONG).show();
         }
     }
@@ -114,8 +116,26 @@ public class GetLocation extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        initFlightController();
-        String result = "经度："+ droneLocationLat+"\n纬度：" + droneLocationLng+"\n高度："+droneHeight;
-        LocInfo.setText(result);
+        switch (view.getId()){
+            case R.id.GetLoc:
+                initFlightController();
+                String result = "经度："+ aircraftLat+"\n纬度：" + aircraftLng+"\n高度："+aircraftHeight;
+                LocInfo.setText(result);
+                break;
+            case R.id.ShowOnMap:
+                Intent intent = new Intent(this,MapActivity.class);
+
+                //测试地点放在宜家
+                double testLat = 30.6188390000;
+                double testLng = 114.1662150000;
+
+
+                intent.putExtra("aircraftLat",testLat);
+                intent.putExtra("aircraftLng",testLng);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }
