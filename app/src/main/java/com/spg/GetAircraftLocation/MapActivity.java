@@ -3,16 +3,21 @@ package com.spg.GetAircraftLocation;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CoordinateConverter;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.vividsolutions.jts.util.CoordinateArrayFilter;
 
 import java.util.Map;
+
+import static com.amap.api.maps.CoordinateConverter.CoordType.ALIYUN;
 
 public class MapActivity extends Activity {
 
@@ -23,8 +28,9 @@ public class MapActivity extends Activity {
     private UiSettings uiSettings;
     private MarkerOptions markerOption;
     private MyLocationStyle myLocationStyle;
-
+    private CoordinateConverter converter;
     private LatLng latLng;
+    private LatLng newLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +64,7 @@ public class MapActivity extends Activity {
         aMap.setMyLocationEnabled(true);
     }
     private void mark(){
-        //getAircraftLocation();
-        latLng = new LatLng(30.53139088,114.3571358);
+        getAircraftLocation();
         markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
                 .fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.num_three)))
                 .position(latLng)
@@ -71,7 +76,13 @@ public class MapActivity extends Activity {
     private void getAircraftLocation(){
         aircraftLocationLat = getIntent().getDoubleExtra("aircraftLat",30.5517670000);//默认在武汉长江大桥
         aircraftLocationLng = getIntent().getDoubleExtra("aircraftLng",114.2832870000);
-        latLng = new LatLng(aircraftLocationLat,aircraftLocationLng);
+        latLng = convert(new LatLng(aircraftLocationLat,aircraftLocationLng));
+    }
+    private LatLng convert(LatLng latLng){
+        CoordinateConverter converter = new CoordinateConverter(this);
+        converter.from(CoordinateConverter.CoordType.GPS);
+        converter.coord(latLng);
+        return converter.convert();
     }
 
 }
