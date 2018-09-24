@@ -126,12 +126,12 @@ public class GetLocation extends Activity implements View.OnClickListener{
                 Intent intent = new Intent(this,MapActivity.class);
 
                 //测试地点放在宜家
-                double testLat = 30.6188390000;
-                double testLng = 114.1662150000;
+                double testLat = 30.53139088;
+                double testLng = 114.3571358;
 
 
-                intent.putExtra("aircraftLat",testLat);
-                intent.putExtra("aircraftLng",testLng);
+                intent.putExtra("aircraftLat",aircraftLat);
+                intent.putExtra("aircraftLng",aircraftLng);
                 startActivity(intent);
                 break;
             default:

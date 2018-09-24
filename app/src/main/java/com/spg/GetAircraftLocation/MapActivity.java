@@ -58,9 +58,10 @@ public class MapActivity extends Activity {
         aMap.setMyLocationEnabled(true);
     }
     private void mark(){
-        getAircraftLocation();
+        //getAircraftLocation();
+        latLng = new LatLng(30.53139088,114.3571358);
         markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
-                .fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.num_one)))
+                .fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.num_three)))
                 .position(latLng)
                 .draggable(true);
         aMap.addMarker(markerOption);
