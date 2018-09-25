@@ -130,8 +130,8 @@ public class GetLocation extends Activity implements View.OnClickListener{
                 double testLng = 114.3571358;
 
 
-                intent.putExtra("aircraftLat",testLat);
-                intent.putExtra("aircraftLng",testLng);
+                intent.putExtra("aircraftLat",aircraftLat);
+                intent.putExtra("aircraftLng",aircraftLng);
                 startActivity(intent);
                 break;
             default:
